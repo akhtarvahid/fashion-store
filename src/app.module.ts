@@ -24,7 +24,7 @@ import { AppService } from './app.service';
           password: configService.get('PGPASSWORD'),
           database: configService.get('PGDATABASE'),
           entities: [Task],
-          synchronize: true, // keep it false in production
+          synchronize: false, // keep it false in production
           ssl:
             configService.get('NODE_ENV') === 'prod'
               ? {

@@ -1,7 +1,6 @@
 # Tasks-app
 
 ## Description
-- API is [Live](https://tasks-app-kjro.onrender.com)
 
 App repo is private because .env.prod, .env.dev is pushed in repo.
 
