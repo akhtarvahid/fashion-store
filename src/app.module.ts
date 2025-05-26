@@ -6,6 +6,7 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { UsersModule } from "./users/users.module";
 import { getTypeOrmConfig } from "./config";
+import { DatabaseService } from "./db/database.service";
 
 @Module({
   imports: [
@@ -18,6 +19,6 @@ import { getTypeOrmConfig } from "./config";
     UsersModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, DatabaseService],
 })
 export class AppModule {}

@@ -15,7 +15,7 @@ export const getTypeOrmConfig: PostgresConnectionOptions = {
   synchronize: false, // false in production
   entities: [__dirname + "/**/*.entity{.ts,.js}"],
   migrationsRun: false, // auto-run migrations on app start disabled
-  migrations: [__dirname + "/migrations/*{.ts,.js}"],
+  migrations: [__dirname + "/db/migrations/*{.ts,.js}"],
   migrationsTableName: "migrations",
   ssl:
     process.env.NODE_ENV === "prod"
