@@ -1,0 +1,24 @@
+{
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@railway/npm"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/"
+    }
+  ],
+  "env": {
+    "PORT": {
+      "description": "Port for the application to listen on",
+      "value": "3000"
+    },
+    "NODE_ENV": {
+      "description": "Node environment",
+      "value": "production"
+    }
+  }
+}
