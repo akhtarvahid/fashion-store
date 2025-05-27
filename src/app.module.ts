@@ -14,7 +14,13 @@ import { DatabaseService } from "./db/database.service";
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV || "dev"}`,
     }),
-    TypeOrmModule.forRoot(getTypeOrmConfig),
+    TypeOrmModule.forRootAsync({
+      useFactory: () => {
+        console.log(" - - - - - -Logging... - - - - ");
+        console.log(getTypeOrmConfig); // Log here
+        return getTypeOrmConfig;
+      },
+    }),
     TasksModule,
     UsersModule,
   ],
