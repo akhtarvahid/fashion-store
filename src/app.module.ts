@@ -5,6 +5,8 @@ import { TasksModule } from './tasks/tasks.module';
 import { Task } from './tasks/entities/task.entity';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { UsersModule } from './users/users.module';
+import { UserEntity as User } from './users/user.entity';
 
 @Module({
   imports: [
@@ -23,8 +25,8 @@ import { AppService } from './app.service';
           username: configService.get('PGUSER'),
           password: configService.get('PGPASSWORD'),
           database: configService.get('PGDATABASE'),
-          entities: [Task],
-          synchronize: false, // keep it false in production
+          entities: [Task, User],
+          synchronize: false,  // keep it false in production
           ssl:
             configService.get('NODE_ENV') === 'prod'
               ? {
@@ -39,6 +41,7 @@ import { AppService } from './app.service';
       },
     }),
     TasksModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
