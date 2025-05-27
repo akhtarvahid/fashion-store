@@ -1,9 +1,10 @@
-# Tasks-app
+# Fashion-store
 
 ## Description
 
 App repo is private because .env.prod, .env.dev is pushed in repo.
 
+Fashion-store is [LIVE](https://fashion-store.up.railway.app)
 
 ## Project setup
 
