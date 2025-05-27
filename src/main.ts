@@ -1,12 +1,12 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from "@nestjs/core";
+import { AppModule } from "./app.module";
+import { ValidationPipe } from "@nestjs/common";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(process.env.PORT || 3000);
-  console.log('Running in environment:', process.env.NODE_ENV);
-console.log('Using DB host:', process.env.PGHOST);
+  console.log("Running environment:", process.env.NODE_ENV);
+  console.log("Using DB host:", process.env.PGHOST);
 }
 bootstrap();

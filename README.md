@@ -11,6 +11,19 @@ App repo is private because .env.prod, .env.dev is pushed in repo.
 $ npm install
 ```
 
+
+### Run migration to add tables
+```bash
+npm run migration:run
+```
+
+How to create, run, and delete migration to make db changes in production
+
+```bash
+npm run migration:generate --name=YourMigrationName
+npm run migration:run
+npm run migration:drop
+```
 ## Compile and run the project
 
 ```bash
