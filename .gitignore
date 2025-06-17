@@ -4,6 +4,8 @@
 /build
 .env.prod
 .env.dev
+.github
+
 # Logs
 logs
 *.log

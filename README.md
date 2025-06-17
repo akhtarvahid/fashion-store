@@ -12,6 +12,11 @@ Fashion-store is [LIVE](https://fashion-store.up.railway.app)
 $ npm install
 ```
 
+## Run postgres through docker
+```bash
+docker run --name fashion-store -p 5454:5432 -e POSTGRES_PASSWORD=fashion -e POSTGRES_USER=fashion -e POSTGRES_DB=fashion -d postgres
+```
+
 
 ### Run migration to add tables
 ```bash
