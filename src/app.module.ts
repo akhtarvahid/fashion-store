@@ -7,7 +7,7 @@ import { AppService } from "./app.service";
 import { UsersModule } from "./users/users.module";
 import { getTypeOrmConfig } from "./config";
 import { DatabaseService } from "./db/database.service";
-import { CustomCacheModule } from "./src/cache.module";
+import { RedisCacheModule } from "./cache/cache.module";
 
 @Module({
   imports: [
@@ -24,7 +24,7 @@ import { CustomCacheModule } from "./src/cache.module";
     }),
     ProductsModule,
     UsersModule,
-    CustomCacheModule
+    RedisCacheModule,
   ],
   controllers: [AppController],
   providers: [AppService, DatabaseService],

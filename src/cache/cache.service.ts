@@ -52,6 +52,7 @@ export class CacheService {
   }
 
   async invalidateCachedProduct(id: number): Promise<void> {
+    console.log('ID', id);
     await this.del(`product_${id}`);
   }
 }

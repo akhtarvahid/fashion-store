@@ -4,7 +4,7 @@ import { Repository } from "typeorm";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
 import { Product } from "./entities/product.entity";
-import { CacheService } from "src/src/cache.service";
+import { CacheService } from "src/cache/cache.service";
 
 @Injectable()
 export class ProductsService {
@@ -16,9 +16,15 @@ export class ProductsService {
 
   async findAll(): Promise<Product[]> {
     const cachedProducts = await this.cacheService.getCachedProducts();
-    if (cachedProducts !== undefined) return cachedProducts;
+    if (cachedProducts !== undefined) {
+      console.log("[Logger: cached data] - ", cachedProducts[0]?.title);
+
+      return cachedProducts;
+    }
 
     const freshData = await this.productsRepository.find();
+    console.log("[Logger: DB data] - ", freshData[0]?.title);
+
     await this.cacheService.setCacheProducts(freshData);
     return freshData;
   }
