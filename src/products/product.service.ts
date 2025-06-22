@@ -4,7 +4,7 @@ import { Repository } from "typeorm";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
 import { Product } from "./entities/product.entity";
-import { CacheService } from "src/cache/cache.service";
+import { CacheService } from "../cache/cache.service";
 
 @Injectable()
 export class ProductsService {
