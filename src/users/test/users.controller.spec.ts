@@ -1,14 +1,13 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { UsersController } from "./users.controller";
-import { UsersService } from "./users.service";
-import { UserEntity as User } from "./user.entity";
-import { CreateUserDto, UpdateUserDto } from "./dto";
-import { EmailRateLimitGuard } from "../rate-limiting/email-rate-limit.guard";
-import { LoginUserDto } from "./dto/login-user.dto";
+import { UsersController } from "../users.controller";
+import { UsersService } from "../users.service";
+import { UserEntity as User } from "../user.entity";
+import { CreateUserDto, UpdateUserDto } from "../dto";
+import { EmailRateLimitGuard } from "../../rate-limiting/email-rate-limit.guard";
+import { LoginUserDto } from "../dto/login-user.dto";
 
 // mock of EmailRateLimitGuard
-
-jest.mock("../rate-limiting/email-rate-limit.guard.ts", () => ({
+jest.mock("../../rate-limiting/email-rate-limit.guard.ts", () => ({
   EmailRateLimitGuard: jest.fn().mockImplementation(() => ({
     canActivate: jest.fn().mockResolvedValue(true),
     getTtl: jest.fn().mockRejectedValue(60000),
@@ -81,7 +80,7 @@ describe("UsersController", () => {
       const result = await controller.login(loginDto);
       expect(usersService.login).toHaveBeenCalledWith(loginDto);
 
-      console.log('loginDto:  ', loginDto)
+      console.log("loginDto:  ", loginDto);
 
       expect(result.email).toEqual(mockUser.email);
     });
@@ -91,7 +90,7 @@ describe("UsersController", () => {
     it("should return an array of users", async () => {
       const result = await controller.findAll();
 
-            console.log('findAll result:  ', result)
+      console.log("findAll result:  ", result);
 
       expect(usersService.findAll).toHaveBeenCalled();
       expect(result).toEqual([mockUser]);
