@@ -14,7 +14,7 @@ import { UsersService } from "./users.service";
 import { UserEntity as User } from "./user.entity";
 import { CreateUserDto, UpdateUserDto } from "./dto";
 import { LoginUserDto } from "./dto/login-user.dto";
-import { EmailRateLimitGuard } from "src/rate-limiting/email-rate-limit.guard";
+import { EmailRateLimitGuard } from "../rate-limiting/email-rate-limit.guard";
 
 @Controller("users")
 @UseInterceptors(ClassSerializerInterceptor) // This will exclude password from responses
@@ -22,7 +22,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post("register")
-  async create(@Body() createUserDto: CreateUserDto): Promise<User> {
+  async register(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.usersService.register(createUserDto);
   }
 
