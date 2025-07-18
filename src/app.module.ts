@@ -8,6 +8,8 @@ import { UsersModule } from "./users/users.module";
 import { getTypeOrmConfig } from "./config";
 import { DatabaseService } from "./db/database.service";
 import { RedisCacheModule } from "./cache/cache.module";
+import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
+import { APP_GUARD } from "@nestjs/core";
 
 @Module({
   imports: [
@@ -22,11 +24,26 @@ import { RedisCacheModule } from "./cache/cache.module";
         return getTypeOrmConfig;
       },
     }),
+    ThrottlerModule.forRoot({
+      throttlers: [
+        {
+          ttl: 60000,
+          limit: 5,
+        },
+      ],
+    }),
     ProductsModule,
     UsersModule,
     RedisCacheModule,
   ],
   controllers: [AppController],
-  providers: [AppService, DatabaseService],
+  providers: [
+    AppService,
+    DatabaseService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
 export class AppModule {}

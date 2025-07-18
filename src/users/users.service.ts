@@ -2,11 +2,14 @@ import {
   Injectable,
   ConflictException,
   NotFoundException,
+  HttpException,
+  HttpStatus,
 } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { UserEntity as User } from "./user.entity";
 import * as bcrypt from "bcrypt";
+import { LoginUserDto } from "./dto/login-user.dto";
 
 @Injectable()
 export class UsersService {
@@ -15,7 +18,7 @@ export class UsersService {
     private usersRepository: Repository<User>
   ) {}
 
-  async create(userData: Partial<User>): Promise<User> {
+  async register(userData: Partial<User>): Promise<User> {
     const existingUser = await this.usersRepository.findOne({
       where: { email: userData.email },
     });
@@ -33,6 +36,19 @@ export class UsersService {
     });
 
     return this.usersRepository.save(user);
+  }
+
+  async login(loginDto: LoginUserDto) {
+    const user = await this.usersRepository.findOne({
+      where: {
+        email: loginDto.email,
+      },
+    });
+
+    if (!user)
+      throw new HttpException("User doesn't exist", HttpStatus.NOT_FOUND);
+
+    return user;
   }
 
   async findAll(): Promise<User[]> {
