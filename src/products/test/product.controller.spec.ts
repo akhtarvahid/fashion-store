@@ -80,7 +80,6 @@ describe("ProductsController", () => {
         title: "New Product",
         description: "New Description",
         category: "New Category",
-        price: 345,
         image: "new.jpg",
       };
 
@@ -97,7 +96,6 @@ describe("ProductsController", () => {
       const updateDto: UpdateProductDto = {
         title: "Updated Product",
         description: "Updated Description",
-        price: 345,
         category: "",
         image: "http://dummy.png",
       };

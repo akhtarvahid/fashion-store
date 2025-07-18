@@ -15,3 +15,17 @@
 | Advanced features       | Basic                | Extensive    |   |   |   |   |   |   |   |
 | Suitable for production | Single instance only | Yes          |   |   |   |   |   |   |   |
 |                         |                      |              |   |   |   |   |   |   |   |
+
+
+### commands to start/stop redis
+
+```js
+brew services start redis
+
+// TEST
+redis-cli ping
+// PONG
+```
+```js
+brew services stop redis
+```

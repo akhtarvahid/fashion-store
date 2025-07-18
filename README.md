@@ -56,5 +56,23 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+### commands to start/stop redis
+
+```js
+brew services start redis
+
+// TEST
+redis-cli ping
+// PONG
+```
+```js
+brew services stop redis
+```
+
 ## Deployment
-# fashion-store
+### fashion-store
+- seeding
+- caching(redis)
+- postgres
+- migrations
+- rate-limiting

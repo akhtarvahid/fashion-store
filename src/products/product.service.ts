@@ -5,6 +5,7 @@ import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
 import { Product } from "./entities/product.entity";
 import { CacheService } from "../cache/cache.service";
+import { ProductResponseDto } from "./dto/product-response.dto";
 
 @Injectable()
 export class ProductsService {
@@ -14,7 +15,7 @@ export class ProductsService {
     private cacheService: CacheService
   ) {}
 
-  async findAll(): Promise<Product[]> {
+  async findAll(): Promise<ProductResponseDto[]> {
     const cachedProducts = await this.cacheService.getCachedProducts();
     if (cachedProducts !== undefined) {
       console.log("[Logger: cached data] - ", cachedProducts[0]?.title);
@@ -29,7 +30,7 @@ export class ProductsService {
     return freshData;
   }
 
-  async findOne(id: number): Promise<Product> {
+  async findOne(id: number): Promise<ProductResponseDto> {
     const cachedProduct = await this.cacheService.getCachedProduct(id);
     console.log("Logger: cached data", cachedProduct);
     if (cachedProduct !== undefined) {
@@ -37,7 +38,7 @@ export class ProductsService {
     }
 
     const product = await this.productsRepository.findOne({ where: { id } });
-    console.log("Logger: db data", cachedProduct);
+    console.log("Logger: db data", product);
 
     if (!product) {
       throw new HttpException("not found!", HttpStatus.UNPROCESSABLE_ENTITY);
@@ -47,7 +48,9 @@ export class ProductsService {
     return product;
   }
 
-  async create(createProductDto: CreateProductDto): Promise<Product> {
+  async create(
+    createProductDto: CreateProductDto
+  ): Promise<ProductResponseDto> {
     const product = this.productsRepository.create(createProductDto);
     await this.cacheService.invalidateCachedProducts();
     return this.productsRepository.save(product);
@@ -56,7 +59,7 @@ export class ProductsService {
   async update(
     id: number,
     updateProductDto: UpdateProductDto
-  ): Promise<Product> {
+  ): Promise<ProductResponseDto> {
     await this.productsRepository.update(id, updateProductDto);
     await this.cacheService.invalidateCachedProducts();
     await this.cacheService.invalidateCachedProduct(id);

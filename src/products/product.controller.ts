@@ -10,23 +10,25 @@ import {
 import { ProductsService } from "./product.service";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
-import { Product } from "./entities/product.entity";
+import { ProductResponseDto } from "./dto/product-response.dto";
 @Controller("products")
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Get()
-  findAll(): Promise<Product[]> {
+  findAll(): Promise<ProductResponseDto[]> {
     return this.productsService.findAll();
   }
 
   @Get(":id")
-  findOne(@Param("id") id: string): Promise<Product> {
+  findOne(@Param("id") id: string): Promise<ProductResponseDto> {
     return this.productsService.findOne(+id);
   }
 
   @Post()
-  create(@Body() createProductDto: CreateProductDto): Promise<Product> {
+  create(
+    @Body() createProductDto: CreateProductDto
+  ): Promise<ProductResponseDto> {
     return this.productsService.create(createProductDto);
   }
 
@@ -34,7 +36,7 @@ export class ProductsController {
   update(
     @Param("id") id: string,
     @Body() updateProductDto: UpdateProductDto
-  ): Promise<Product> {
+  ): Promise<ProductResponseDto> {
     return this.productsService.update(+id, updateProductDto);
   }
 
